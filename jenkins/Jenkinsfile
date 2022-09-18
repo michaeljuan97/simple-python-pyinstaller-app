@@ -47,11 +47,20 @@ pipeline {
 
 
 
-/* Requires the Docker Pipeline plugin */
+/* Scripted Pipeline */
 node('docker') {
-    stage('Build') {
-        docker.image('python:3.10.1-alpine').inside {
-            sh 'python --version'
+    try {
+        stage('Build') {
+            docker.image('python:3.10.1-alpine').inside {
+                sh 'python -m py_compile sources/add2vals.py sources/calc.py'
         }
+
+    } catch (e) {
+        echo 'This will run only if successful'
+
+        throw e
+    } finally {
+        // Post steps in here i guess
     }
+    
 }
