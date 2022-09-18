@@ -15,3 +15,21 @@ node() {
     }
     
 }
+
+
+node() {
+    try {
+        stage('Test') {
+            docker.image('qnib/pytest').inside {
+                sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
+        } 
+        }
+    } catch (e) {
+        echo 'This will run only if successful'
+
+        throw e
+    } finally {
+        // Post steps in here i guess
+    }
+    
+}
