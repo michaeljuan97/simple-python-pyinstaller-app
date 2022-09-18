@@ -11,7 +11,7 @@ node() {
 
         throw e
     } finally {
-        // Post steps in here i guess
+        echo 'Build Completed'
     }
     
 }
@@ -30,6 +30,7 @@ node() {
         throw e
     } finally {
         // Post steps in here i guess
+        echo 'Test Completed'
     }
     
 }
